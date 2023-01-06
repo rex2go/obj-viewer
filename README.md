@@ -1,5 +1,5 @@
-# .obj viewer
+# typescript .obj viewer
 
-plain typescript 3d projector
+3d projection from scratch
 
 https://rex2go.github.io/obj-viewer/
