@@ -85,8 +85,8 @@ const previewModel = (objects: ObjectType[], options: OptionsType = {}) => {
 
   document.addEventListener("mousemove", (event) => {
     if (mouseButtonPressed[0]) {
-      yAngle += event.movementX * -0.01;
-      xAngle += event.movementY * 0.01;
+      yAngle += event.movementX * 0.01;
+      xAngle += event.movementY * -0.01;
     }
   });
 
@@ -157,13 +157,15 @@ const previewModel = (objects: ObjectType[], options: OptionsType = {}) => {
           const p1 = projectedPoints[face - 1];
           const p2 = projectedPoints[(index + 1 < faces.length ? faces[index + 1] - 1 : faces[0] - 1)];
 
+          if(!p1 || !p2) return;
+          if([p1[0], p2[0]].some(p => p < 0 || p > canvas.width)) return;
+          if([p1[1], p2[1]].some(p => p < 0 || p > canvas.height)) return;
+
           context.beginPath();
           context.moveTo(p1[0], p1[1]);
           context.lineTo(p2[0], p2[1]);
           context.stroke();
         });
-
-
       });
     });
 
